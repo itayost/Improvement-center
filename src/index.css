@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+:root {
+  /* Assuta Extracted Tokens */
+  --color-primary-blue: #2642A6;
+  --color-primary-blue-gradient: linear-gradient(90deg, #2642A6, #1641DD);
+
+  --color-secondary-green: #88C23D;
+  --color-secondary-green-gradient: linear-gradient(90deg, #88C23D, #A8EB53);
+
+  --color-accent: #2642A6;
+  /* Using the primary blue for text headers too */
+
+  /* Neutrals */
+  --color-bg-body: #F2F4F7;
+  /* Exact Assuta BG */
+  --color-bg-card: #FAFAFA;
+  --color-text-main: #2D3748;
+  --color-text-muted: #718096;
+  --color-border: #E2E8F0;
+
+  /* Typography */
+  --font-main: 'Heebo', sans-serif;
+
+  /* Spacing & Shapes */
+  --radius-xl: 27px;
+  /* Exact Assuta Radius */
+  --radius-sm: 8px;
+
+  --shadow-card: 0px 3.2px 6.4px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0px 8px 16px rgba(0, 0, 0, 0.12);
+
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  --container-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-body);
+  direction: rtl;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-xl);
+  /* Assuta Pill Shape */
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: white;
+}
+
+/* Assuta "Personal Area" Style */
+.btn-primary {
+  background: var(--color-primary-blue-gradient);
+  box-shadow: 0 4px 12px rgba(38, 66, 166, 0.3);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* Assuta "Appointment" Style */
+.btn-secondary {
+  background: var(--color-secondary-green-gradient);
+  color: white;
+  /* Green gradient always has white text */
+  box-shadow: 0 4px 12px rgba(136, 194, 61, 0.3);
+  border: none;
+}
+
+.btn-secondary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.section-title {
+  color: var(--color-accent);
+  font-size: 2.5rem;
+  font-weight: 300;
+  /* Light weight like Assuta */
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: var(--color-secondary-green);
+  border-radius: 2px;
+}
+
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-lg);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
