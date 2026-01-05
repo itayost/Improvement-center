@@ -73,6 +73,10 @@ export default function ContactPage() {
                                 <option>אחר</option>
                             </select>
                         </div>
+                        <div className="form-group">
+                            <label>הודעה <span className="optional-label">(אופציונלי)</span></label>
+                            <textarea className="form-input form-textarea" placeholder="ספרו לנו במה נוכל לעזור..." rows="4"></textarea>
+                        </div>
                         <button type="submit" className="btn btn-primary submit-btn">
                             שליחת פנייה
                         </button>
@@ -158,6 +162,11 @@ export default function ContactPage() {
           outline: none;
           border-color: var(--color-primary-blue);
           box-shadow: 0 0 0 3px rgba(38, 66, 166, 0.1);
+        }
+        .form-textarea {
+          resize: vertical;
+          min-height: 100px;
+          line-height: 1.5;
         }
         .submit-btn {
           width: 100%;
