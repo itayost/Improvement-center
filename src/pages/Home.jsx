@@ -4,7 +4,7 @@ import Services from '../components/Services';
 import CtaStrip from '../components/CtaStrip';
 import Stats from '../components/Stats';
 import Testimonials from '../components/Testimonials';
-import Faq from '../components/Faq';
+import ContactForm from '../components/ContactForm';
 import About from '../components/About';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
             <CtaStrip />
             <About />
             <Testimonials />
-            <Faq />
+            <ContactForm />
         </>
     );
 }

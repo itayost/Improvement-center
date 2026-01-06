@@ -1,11 +1,11 @@
 import React from 'react';
-import { Users, Activity, Award, Clock } from 'lucide-react';
+import { Users, Activity, Trophy, MapPin } from 'lucide-react';
 
 const stats = [
     { label: "אנשי מקצוע בצוות", value: "100+", icon: <Users /> },
     { label: "שיעור הצלחה", value: "87%", icon: <Activity /> },
-    { label: "שנות ניסיון", value: "8+", icon: <Award /> },
-    { label: "פריסה ארצית", value: "נמצאים בכל הארץ", icon: <Clock /> },
+    { label: "מקום 1 בשירות", value: "#1", icon: <Trophy /> },
+    { label: "פריסה ארצית", value: "בכל הארץ", icon: <MapPin /> },
 ];
 
 export default function Stats() {

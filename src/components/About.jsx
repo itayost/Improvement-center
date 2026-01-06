@@ -24,7 +24,7 @@ export default function About() {
                             <li>תוכנית ליווי אישית עד הבית</li>
                             <li>ליווי רציף גם בין המפגשים באמצעות פעילים+</li>
                         </ul>
-                        <a href="/contact" className="btn btn-primary about-cta-btn">
+                        <a href="/contact" className="btn btn-secondary about-cta-btn">
                             לתיאום הערכת תפקוד
                         </a>
                     </div>

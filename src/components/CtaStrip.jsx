@@ -18,11 +18,11 @@ export default function CtaStrip() {
                 <div className="cta-buttons">
                     <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                         <WhatsAppIcon size={20} />
-                        שיחת ייעוץ חינם
+                        כתבו לנו
                     </a>
                     <a href="tel:073-729-66-99" className="btn btn-secondary">
                         <Phone size={20} />
-                        073-729-66-99
+                        שיחת ייעוץ
                     </a>
                 </div>
             </div>

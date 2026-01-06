@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const WhatsAppIcon = ({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{display: 'inline', verticalAlign: 'middle', marginLeft: '0.25rem'}}>
@@ -8,16 +9,22 @@ const WhatsAppIcon = ({ size = 16 }) => (
 
 const topServices = [
   {
-    title: 'צוות רב-מקצועי',
-    desc: 'פיזיותרפיסטים, מאמני תנועה תפקודית, ספורטתרפיסטים, רופאים ואנשי מקצוע נוספים.'
+    title: 'שירותי תנועה ושיקום עד הבית',
+    desc: 'המרכז לשיפור התנועה מעניק שירותי אימון ושיקום עד לבית הלקוח, בליווי צוות רב־מקצועי בהתאמה אישית למצב התפקודי, ליכולת ולמטרות של כל אדם.',
+    link: '/contact',
+    linkText: 'להשארת פרטים'
   },
   {
-    title: 'שירות עד הבית',
-    desc: 'המרכז לשיפור התנועה מוביל את המצוינות במתן שירות עד לבית הלקוח עם ליווי מקצועי ויחס אישי.'
+    title: 'צוות רב־מקצועי',
+    desc: 'פיזיותרפיסטים מוסמכים, מאמני תנועה תפקודית, ספורטתרפיסטים, רופאים ואנשי מקצוע נוספים – הפועלים יחד ליצירת תהליך מותאם אישית לשיפור העצמאות, התנועה ואיכות החיים.',
+    link: '/about',
+    linkText: 'לצפייה בצוות'
   },
   {
     title: 'הערכת תפקוד עד הבית',
-    desc: 'הבנת הרקע, בדיקת כוח שריר, טווחי תנועה, יכולות תפקודיות. ניתוח שיווי המשקל הסטטי והדינאמי ולבסוף התאמת תוכנית ייחודית ומותאמת אישית.'
+    desc: 'הבנת הרקע, בדיקת כוח שריר, טווחי תנועה, שיווי משקל סטטי ודינאמי, יכולות תפקודיות ומיפוי המצב הקיים והיכולות.',
+    link: '/contact',
+    linkText: 'לתיאום הערכה'
   }
 ];
 
@@ -32,6 +39,9 @@ export default function Services() {
               <h3 className="card-title">{service.title}</h3>
               <div className="card-divider"></div>
               <p className="card-desc">{service.desc}</p>
+              <Link to={service.link} className="card-link-btn">
+                {service.linkText}
+              </Link>
             </div>
           ))}
         </div>
@@ -63,7 +73,7 @@ export default function Services() {
 
           {/* Image Card */}
           <div className="assuta-card-image">
-            <img src="/hero/תמונה 2.png" alt="אימון תנועה בסלון" />
+            <img src="/פעילים פלוס.png" alt="פעילים פלוס" />
           </div>
         </div>
       </div>
@@ -152,11 +162,40 @@ export default function Services() {
           line-height: 1.6;
         }
 
-        .text-link {
-          color: var(--color-primary-blue);
-          font-weight: 700;
-          margin-top: 1rem;
+        .card-link-btn {
+          margin-top: auto;
+          padding: 0.75rem 1.5rem;
+          background: var(--color-secondary-green-gradient);
+          color: white;
+          font-weight: 600;
+          font-size: 0.95rem;
+          border-radius: 0.75rem;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
           display: inline-block;
+        }
+        .card-link-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          color: white;
+        }
+
+        .text-link {
+          padding: 0.75rem 1.5rem;
+          background: var(--color-secondary-green-gradient);
+          color: white;
+          font-weight: 600;
+          font-size: 0.95rem;
+          border-radius: 0.75rem;
+          margin-top: 1rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .text-link:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          color: white;
         }
 
         .card-subtitle {
@@ -242,6 +281,8 @@ export default function Services() {
           }
           .text-link {
             margin-top: 1.5rem;
+            padding: 0.85rem 2rem;
+            font-size: 1rem;
           }
         }
       `}</style>

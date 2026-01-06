@@ -1,14 +1,19 @@
-import { Link } from 'react-router-dom';
-import { Phone } from 'lucide-react';
+import { User } from 'lucide-react';
 
-const WhatsAppIcon = ({ size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-);
+// Staff avatar component with fallback
+const StaffAvatar = ({ src, name, className }) => {
+    const hasImage = src && !src.includes('unsplash');
 
-// Team member images
-const placeholderImg = 'https://images.unsplash.com/photo-1559839734-2b71ea86b543?auto=format&fit=crop&q=80&w=150&h=150';
+    if (hasImage) {
+        return <img src={src} alt={name} className={className} />;
+    }
+
+    return (
+        <div className={`${className} avatar-placeholder`}>
+            <User size={32} />
+        </div>
+    );
+};
 
 // Trusted organizations logos
 const trustedLogos = [
@@ -30,45 +35,141 @@ const staffMembers = [
     },
     {
         name: 'רקל שרף',
-        role: 'פיזיותרפיסטית ומאמנת',
-        description: 'מאמנת אישית לגיל השלישי ופיזיותרפיסטית מאוניברסיטת קולומביה.',
+        role: 'מאמנת תנועה תפקודית',
+        description: 'בעלת תואר פיזיותרפיסטית מקולומביה.',
         img: '/team/raquel.jpeg'
     },
     {
+        name: 'יהב בן דוד',
+        role: 'פיזיותרפיסטית מוסמכת',
+        description: 'בעלת הכשרה לטיפול וסטיבולרי.',
+        img: '/team/יהב בן דוד .jpeg'
+    },
+    {
         name: 'ניצן שלום',
-        role: 'דיאטנית קלינית ומאמנת כושר',
-        description: 'דיאטנית קלינית, מאמנת כושר וסטודנטית לרפואה.',
+        role: 'מאמנת תנועה תפקודית ודיאטנית קלינית',
+        description: '',
         img: '/team/ניצן שלום .jpeg'
     },
     {
         name: 'שחר בק',
-        role: 'ספורטתרפיסט ומאמן אישי',
-        description: 'מומחה בספורטתרפיה ואימון אישי.',
+        role: 'מאמן תנועה תפקודית',
+        description: 'ספורטתרפיסט ומשקם פציעות.',
         img: '/team/שחר בק .jpeg'
     },
     {
-        name: 'קים',
-        role: 'מאמנת תנועה תפקודית',
-        description: 'מתמחה באימון תנועה תפקודית לגיל השלישי.',
-        img: '/team/קים.jpeg'
+        name: 'אדם פלפס',
+        role: 'מאמן תנועה תפקודית',
+        description: 'טיפוח יציבה ושיווי משקל.',
+        img: '/team/אדם פלפס .jpeg'
     },
     {
-        name: 'מרגו',
+        name: 'מרגו סולומיאניק',
         role: 'מאמנת תנועה תפקודית',
-        description: 'מאמנת מנוסה בעבודה עם מבוגרים.',
+        description: '',
         img: '/team/מרגו .jpeg'
     },
     {
-        name: 'יהב בן דוד',
+        name: 'דניאל שפיר',
         role: 'מאמן תנועה תפקודית',
-        description: 'מתמחה בשיפור תנועה ויציבות.',
-        img: '/team/יהב בן דוד .jpeg'
+        description: 'משקם נוירולוגי.',
+        img: '/team/דניאל שפיר .jpeg'
+    },
+    {
+        name: 'אושרת מאיר',
+        role: 'מאמנת תנועה תפקודית ואחות מוסמכת',
+        description: 'מס\' רישיון 234603.',
+        img: '/team/אושרת מאיר .jpeg'
+    },
+    {
+        name: 'אולגה',
+        role: 'מאמנת תנועה תפקודית',
+        description: '',
+        img: '/team/אולגה .jpeg'
+    },
+    {
+        name: 'אלעד משעני',
+        role: 'מאמן תנועה תפקודית',
+        description: '',
+        img: '/team/אלעד משעני .jpeg'
     },
     {
         name: 'לינוי',
         role: 'מאמנת תנועה תפקודית',
-        description: 'מאמנת מסורה לשיפור איכות החיים.',
+        description: '',
         img: '/team/לינוי .jpeg'
+    },
+    {
+        name: 'קים',
+        role: 'מאמנת תנועה תפקודית',
+        description: '',
+        img: '/team/קים.jpeg'
+    },
+    {
+        name: 'גדי בן שטרית',
+        role: 'פיזיותרפיסט מוסמך',
+        description: '',
+        img: null
+    },
+    {
+        name: 'וג\'ד נסאר',
+        role: 'פיזיותרפיסט מוסמך',
+        description: 'מס\' רישיון 10110047.',
+        img: null
+    },
+    {
+        name: 'ד"ר מיסא סח',
+        role: 'רופאה פנימית',
+        description: 'מומחית ברפואה פנימית.',
+        img: null
+    },
+    {
+        name: 'ד"ר ואיל נסאר',
+        role: 'רופא נוירולוג',
+        description: 'חלק מהצוות המייעץ.',
+        img: null
+    },
+    {
+        name: 'יאיר אהרונוב',
+        role: 'מאמן תנועה תפקודית',
+        description: '',
+        img: null
+    },
+    {
+        name: 'דניאל סנרמן',
+        role: 'מאמן תנועה תפקודית',
+        description: '',
+        img: null
+    },
+    {
+        name: 'מזל מרזוק',
+        role: 'מאמנת תנועה תפקודית',
+        description: 'מדריכת שיקום מתקדמת.',
+        img: null
+    },
+    {
+        name: 'אחמד ביאדסה',
+        role: 'פיזיותרפיסט מוסמך',
+        description: 'מס\' רישיון 10-151087.',
+        img: null
+    },
+    {
+        name: 'מוניס זחאלקה',
+        role: 'פיזיותרפיסט מוסמך',
+        description: '',
+        img: null
+    },
+    {
+        name: 'סנד מסארווה',
+        role: 'פיזיותרפיסט מוסמך',
+        description: 'בעל הכשרה וסטיבולרית. מס\' רישיון 10-176568.',
+        img: null
+    },
+    {
+        name: 'מוחמד חטיב',
+        role: 'פיזיותרפיסט מוסמך',
+        description: 'מס\' רישיון 10-162135.',
+        img: null
     }
 ];
 
@@ -164,7 +265,7 @@ export default function AboutPage() {
                 <div className="staff-grid">
                     {staffMembers.map((staff, idx) => (
                         <div key={idx} className={`staff-card card ${staff.featured ? 'featured' : ''}`}>
-                            <img src={staff.img} alt={staff.name} className="staff-img" />
+                            <StaffAvatar src={staff.img} name={staff.name} className="staff-img" />
                             <h3>{staff.name}</h3>
                             <span className="staff-role">{staff.role}</span>
                             <p>{staff.description}</p>
@@ -190,12 +291,8 @@ export default function AboutPage() {
                     <h3>רוצים להתחיל?</h3>
                     <p>צרו קשר עוד היום ונתאים לכם תוכנית ליווי אישית</p>
                     <div className="cta-buttons">
-                        <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                            <WhatsAppIcon size={18} />
-                            דברו איתנו בוואטסאפ
-                        </a>
-                        <a href="tel:073-729-66-99" className="btn btn-secondary">
-                            073-729-66-99
+                        <a href="tel:050-477-6665" className="btn btn-secondary cta-main-btn">
+                            דברו איתנו לקביעת הערכת תפקוד
                         </a>
                     </div>
                 </div>
@@ -343,6 +440,13 @@ export default function AboutPage() {
           border: 2px solid white;
           box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        .staff-img.avatar-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+          color: #64748b;
+        }
         .staff-card h3 {
           font-size: 0.9rem;
           margin-bottom: 0.15rem;
@@ -434,8 +538,14 @@ export default function AboutPage() {
         }
 
         .cta-buttons .btn-secondary {
-          background: white;
-          color: var(--color-accent);
+          background: var(--color-secondary-green-gradient);
+          color: white;
+        }
+
+        .cta-main-btn {
+          padding: 1.1rem 2rem;
+          font-size: 1.1rem;
+          font-weight: 600;
         }
 
         @media (min-width: 768px) {
@@ -529,6 +639,10 @@ export default function AboutPage() {
             height: 100px;
             margin-bottom: 1rem;
             border: 3px solid white;
+          }
+          .staff-img.avatar-placeholder svg {
+            width: 40px;
+            height: 40px;
           }
           .staff-card h3 {
             font-size: 1.1rem;
