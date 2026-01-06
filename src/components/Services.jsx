@@ -269,6 +269,9 @@ export default function Services() {
             height: 100%;
             order: 0;
           }
+          .assuta-card-image img {
+            object-position: top center;
+          }
           .card-title {
             font-size: 1.8rem;
             margin-bottom: 1rem;

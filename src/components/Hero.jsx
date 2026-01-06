@@ -20,9 +20,9 @@ const FacebookIcon = ({ size = 20 }) => (
 
 // Carousel slides configuration (images only)
 const heroSlides = [
-  { image: "/hero/תמונה 1.jpeg" },
-  { image: "/hero/תמונה 2.png" },
-  { image: "/hero/תמונה 4.png" }
+  { image: "/hero/תמונה 1.jpeg", desktopPosition: "center 15%" },
+  { image: "/hero/תמונה 2.png", desktopPosition: "center 10%" },
+  { image: "/hero/תמונה 4.png", desktopPosition: "center 25%" }
 ];
 
 // Trust badges that rotate independently
@@ -69,7 +69,10 @@ export default function Hero() {
           <div
             key={index}
             className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-            style={{ backgroundImage: `url('${slide.image}')` }}
+            style={{
+              backgroundImage: `url('${slide.image}')`,
+              '--desktop-position': slide.desktopPosition
+            }}
           />
         ))}
         <div className="hero-overlay"></div>
@@ -325,7 +328,7 @@ export default function Hero() {
             padding: 3rem 0;
           }
           .hero-slide {
-            background-position: center 20%;
+            background-position: var(--desktop-position, center 20%);
           }
           .hero-overlay {
             background: rgba(0,0,0,0.35);
