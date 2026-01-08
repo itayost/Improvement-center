@@ -189,6 +189,7 @@ export default function Services() {
           margin-top: 1rem;
           display: inline-flex;
           align-items: center;
+          align-self: center;
           gap: 0.5rem;
           transition: transform 0.2s ease, box-shadow 0.2s ease;
         }

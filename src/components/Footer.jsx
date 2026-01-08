@@ -66,6 +66,7 @@ export default function Footer() {
             <div className="footer-bottom">
                 <div className="container">
                     <p>© 2026 כל הזכויות שמורות למרכז לשיפור התנועה</p>
+                    <p className="credit">בנייה ועיצוב: <a href="https://www.itayost.com/" target="_blank" rel="noopener noreferrer">ItayOst</a></p>
                 </div>
             </div>
 
@@ -163,6 +164,17 @@ export default function Footer() {
           text-align: center;
           font-size: 0.8rem;
           color: #94a3b8;
+        }
+        .credit {
+          margin-top: 0.5rem;
+          font-size: 0.75rem;
+        }
+        .credit a {
+          color: var(--color-primary);
+          transition: opacity 0.2s;
+        }
+        .credit a:hover {
+          opacity: 0.8;
         }
 
         @media (min-width: 768px) {
