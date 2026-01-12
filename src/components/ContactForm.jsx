@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FORMSPREE_ID = 'xaqqyqwl';
+const FORM_EMAIL = 'office@improve-movement.co.il';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -19,15 +19,17 @@ export default function ContactForm() {
         setStatus('submitting');
 
         try {
-            const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+            const response = await fetch(`https://formsubmit.co/ajax/${FORM_EMAIL}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     name: formData.name,
                     phone: formData.phone,
-                    reason: formData.reason || 'לא צוין'
+                    reason: formData.reason || 'לא צוין',
+                    _subject: 'פנייה חדשה מהאתר - המרכז לשיפור התנועה'
                 })
             });
 
