@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, Home, Info, Briefcase, MessageCircle } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
@@ -6,10 +6,32 @@ import logo from '../assets/logo.png';
 export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
+  const [headerHidden, setHeaderHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Only hide/show on mobile (under 768px)
+      if (window.innerWidth < 768) {
+        if (currentScrollY > lastScrollY && currentScrollY > 60) {
+          setHeaderHidden(true);
+        } else {
+          setHeaderHidden(false);
+        }
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <>
-      <header className="header">
+      <header className={`header ${headerHidden ? 'header-hidden' : ''}`}>
         <div className="container header-container">
           {/* Logo */}
           <Link to="/" className="logo-container">
@@ -66,6 +88,10 @@ export default function Header() {
           top: 0;
           z-index: 1000;
           padding: 1rem 0;
+          transition: transform 0.3s ease;
+        }
+        .header-hidden {
+          transform: translateY(-100%);
         }
         .header-container {
           display: flex;
