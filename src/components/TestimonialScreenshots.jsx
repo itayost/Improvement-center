@@ -64,7 +64,7 @@ export default function TestimonialScreenshots() {
         }
 
         .screenshot-item {
-          flex: 0 0 85%;
+          flex: 0 0 70%;
           scroll-snap-align: center;
           border-radius: 1rem;
           overflow: hidden;
