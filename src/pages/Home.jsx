@@ -6,16 +6,18 @@ import Stats from '../components/Stats';
 import Testimonials from '../components/Testimonials';
 import ContactForm from '../components/ContactForm';
 import About from '../components/About';
+import TestimonialScreenshots from '../components/TestimonialScreenshots';
 
 export default function Home() {
     return (
         <>
             <Hero />
             <Stats />
+            <Testimonials />
             <Services />
             <CtaStrip />
             <About />
-            <Testimonials />
+            <TestimonialScreenshots />
             <ContactForm />
         </>
     );

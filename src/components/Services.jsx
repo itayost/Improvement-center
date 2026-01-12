@@ -9,22 +9,25 @@ const WhatsAppIcon = ({ size = 16 }) => (
 
 const topServices = [
   {
-    title: 'שירותי תנועה ושיקום עד הבית',
-    desc: 'המרכז לשיפור התנועה מעניק שירותי אימון ושיקום עד לבית הלקוח, בליווי צוות רב־מקצועי בהתאמה אישית למצב התפקודי, ליכולת ולמטרות של כל אדם.',
-    link: '/contact',
-    linkText: 'להשארת פרטים'
+    title: 'תנועה ושיקום עד הבית',
+    subtitle: 'מחזירים את הביטחון והתפקוד!',
+    desc: 'כשקשה לקום, ההליכה פחות יציבה או שהגוף כבר לא מרגיש כמו פעם – אנחנו מגיעים אליכם עד הבית, מבצעים הערכה ראשונית ובונים תוכנית מותאמת באופן אישי. השירות ניתן בליווי צוות מקצועי, כדי לשפר את התנועה, לחזק את הביטחון ולשמור על עצמאות ביום־יום.',
+    link: null,
+    linkText: null
   },
   {
     title: 'צוות רב־מקצועי',
-    desc: 'פיזיותרפיסטים מוסמכים, מאמני תנועה תפקודית, ספורטתרפיסטים, רופאים ואנשי מקצוע נוספים – הפועלים יחד ליצירת תהליך מותאם אישית לשיפור העצמאות, התנועה ואיכות החיים.',
-    link: '/about',
-    linkText: 'לצפייה בצוות'
+    subtitle: 'אתם לא לבד!',
+    desc: 'הצוות שלנו כולל פיזיותרפיסטים, מאמנים מוסמכים, רופאים ואנשי מקצוע נוספים, הפועלים יחד לבניית תהליך יעיל ומדויק ככל האפשר. במטרה לעזור לכם להרגיש בטוחים יותר ולחיות עצמאיים יותר.',
+    link: null,
+    linkText: null
   },
   {
     title: 'הערכת תפקוד עד הבית',
-    desc: 'הבנת הרקע, בדיקת כוח שריר, טווחי תנועה, שיווי משקל סטטי ודינאמי, יכולות תפקודיות ומיפוי המצב הקיים והיכולות.',
+    subtitle: null,
+    desc: 'המפגש הראשון מתקיים אצלכם בבית, בסביבה מוכרת ובטוחה. במהלך ההערכה נבחן יחד: כוח שריר, טווחי תנועה, שיווי משקל סטטי ודינאמי. נבצע מספר מבדקים למפות את המצב הקיים. נבין מהם היכולות התפקודיות ביום־יום ולבסוף נבנה תוכנית במטרה לשפר את איכות החיים.',
     link: '/contact',
-    linkText: 'לתיאום הערכה'
+    linkText: 'לתיאום הערכת תפקוד'
   }
 ];
 
@@ -32,16 +35,20 @@ export default function Services() {
   return (
     <section id="services" className="services-section">
       <div className="container">
+        <h2 className="section-title">הדרך שלנו לעזור לכם</h2>
         {/* Top Grid: 3 Cards */}
         <div className="services-top-grid">
           {topServices.map((service, index) => (
             <div key={index} className="assuta-card">
               <h3 className="card-title">{service.title}</h3>
               <div className="card-divider"></div>
+              {service.subtitle && <p className="card-subtitle-text">{service.subtitle}</p>}
               <p className="card-desc">{service.desc}</p>
-              <Link to={service.link} className="card-link-btn">
-                {service.linkText}
-              </Link>
+              {service.link && (
+                <Link to={service.link} className="card-link-btn">
+                  {service.linkText}
+                </Link>
+              )}
             </div>
           ))}
         </div>
@@ -53,20 +60,20 @@ export default function Services() {
             <h3 className="card-title">ליווי דיגיטלי – חלק מהשיטה שלנו</h3>
             <div className="card-divider"></div>
             <p className="card-desc">
-              במרכז לשיפור התנועה, השירות לא מסתיים כשאיש המקצוע יוצא מהבית.
-              כחלק בלתי נפרד מהשיטה שלנו, כל מתאמן ומתאמנת מקבלים ליווי דיגיטלי אישי – פעילים+
-              שנועד לשמור על רצף, ביטחון והתקדמות בין המפגשים.
+              במרכז לשיפור התנועה, הליווי לא מסתיים כשהאיש המקצוע יוצא מהבית.
+              כחלק מהשיטה שלנו, כל מטופל או מטופלת מקבלים ליווי דיגיטלי אישי – פעילים+,
+              שנועד לשמור על רצף, ביטחון והתקדמות גם בין המפגשים.
             </p>
             <p className="card-subtitle">הליווי הדיגיטלי מאפשר:</p>
             <ul className="peilim-list">
-              <li>חיזוק והטמעה של מה שנעשה במפגשים הפרונטליים</li>
-              <li>תזכורת עדינה לתנועה נכונה ושגרה יומיומית</li>
-              <li>הכוונה מקצועית גם בימים ללא אימון</li>
-              <li>תחושת מסגרת וליווי – לא לבד בין האימונים</li>
+              <li>חיזוק והטמעה של מה שנעשה במפגשים האישיים</li>
+              <li>תזכורת לתרגול היום יומי (מעלה את הסיכוי להתמדה בלמעלה מ-50%)</li>
+              <li>הילדים מעודכנים דרך האפליקציה</li>
+              <li>תחושת מסגרת וליווי – כך שלא נשארים לבד בין המפגשים</li>
             </ul>
             <p className="card-footer-text">
-              המערכת פשוטה, נגישה ומותאמת במיוחד לגיל השלישי,
-              ומשלימה את העבודה בבית כחלק מתהליך אחד רציף.
+              המערכת פשוטה, נגישה, מותאמת במיוחד לגיל השלישי,
+              ומשלימה את העבודה בבית כחלק מתהליך ליווי רציף.
             </p>
             <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" className="text-link"><WhatsAppIcon size={16} /> התחילו עכשיו</a>
           </div>
@@ -154,6 +161,13 @@ export default function Services() {
           background: var(--color-secondary-green);
           margin-bottom: 1rem;
           border-radius: 2px;
+        }
+
+        .card-subtitle-text {
+          color: var(--color-accent);
+          font-weight: 600;
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
         }
 
         .card-desc {
@@ -283,10 +297,13 @@ export default function Services() {
           .card-desc {
             font-size: 1.1rem;
           }
+          .card-subtitle-text {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+          }
+          .card-link-btn,
           .text-link {
-            margin-top: 1.5rem;
-            padding: 0.85rem 2rem;
-            font-size: 1rem;
+            display: none;
           }
         }
       `}</style>

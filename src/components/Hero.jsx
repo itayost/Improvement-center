@@ -98,13 +98,13 @@ export default function Hero() {
       {/* Content area */}
       <div className="container hero-container">
         <div className="hero-card">
-          <h1 className="hero-title">
-            <span className="title-line">חווים קושי בפעולות יום יומיות פשוטות?</span>
-            <span className="title-line highlight">חוסר שיווי משקל או קשיי הליכה?</span>
+          <h1 className="hero-main-title">
+            <span className="title-line">מרגישים ירידה בתפקוד היום יומי?</span>
+            <span className="title-line">חווים חוסר שיווי משקל או נפילות?</span>
           </h1>
-          <h2 className="hero-main-title">אימוני תנועה תפקודית עד הבית!</h2>
           <p className="hero-subtitle">
-            פתרון שיקומי לנפילות, חוסר יציבות וקושי בהליכה!
+            <span className="subtitle-line">לחזור לחיים עצמאיים!</span>
+            <span className="subtitle-line">תהליך שיקומי־תנועתי עד הבית!</span>
           </p>
           <div className="hero-actions">
             <Link to="/contact" className="btn btn-secondary hero-cta">
@@ -244,38 +244,31 @@ export default function Hero() {
           box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
         }
 
-        .hero-title {
-          font-size: 1.1rem;
-          font-weight: 400;
-          color: var(--color-text-muted);
-          line-height: 1.5;
-          margin-bottom: 0.5rem;
+        .hero-main-title {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: var(--color-accent);
+          margin-bottom: 0.75rem;
+          line-height: 1.4;
+          text-align: center;
         }
 
         .title-line {
           display: block;
-          margin-bottom: 0.1rem;
-        }
-
-        .highlight {
-          color: var(--color-primary-blue);
-          font-weight: 500;
-        }
-
-        .hero-main-title {
-          font-size: 1.4rem;
-          font-weight: 700;
-          color: var(--color-accent);
-          margin-bottom: 0.5rem;
-          line-height: 1.3;
+          margin-bottom: 0.25rem;
         }
 
         .hero-subtitle {
-          font-size: 1rem;
+          font-size: 0.95rem;
           color: var(--color-text-main);
           margin-bottom: 1.25rem;
-          line-height: 1.6;
+          line-height: 1.5;
           font-weight: 500;
+          text-align: center;
+        }
+
+        .subtitle-line {
+          display: block;
         }
 
         .hero-actions {
@@ -368,20 +361,15 @@ export default function Hero() {
             max-width: 600px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.15);
           }
-          .hero-title {
-            font-size: 1.4rem;
-            line-height: 1.35;
+          .hero-main-title {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
           }
           .title-line {
-            margin-bottom: 0.25rem;
-          }
-          .hero-main-title {
-            font-size: 2.2rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.35rem;
           }
           .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             margin-bottom: 2rem;
           }
           .hero-cta {

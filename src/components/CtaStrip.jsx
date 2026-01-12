@@ -1,5 +1,4 @@
 import React from 'react';
-import { CalendarCheck, Phone } from 'lucide-react';
 
 const WhatsAppIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -16,13 +15,9 @@ export default function CtaStrip() {
                     <p>התאמת תוכנית לשיפור התנועה התפקודית בהתאמה אישית</p>
                 </div>
                 <div className="cta-buttons">
-                    <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                    <a href="https://wa.me/972504776665?text=היי%2C%20הגעתי%20מהאתר%20ואני%20מעוניין%20לדעת%20עוד%20על%20הערכת%20תפקוד" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                         <WhatsAppIcon size={20} />
-                        כתבו לנו
-                    </a>
-                    <a href="tel:073-729-66-99" className="btn btn-secondary">
-                        <Phone size={20} />
-                        שיחת ייעוץ
+                        לקביעת הערכת תפקוד
                     </a>
                 </div>
             </div>
