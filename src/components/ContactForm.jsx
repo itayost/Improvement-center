@@ -1,35 +1,118 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+const FORMSPREE_ID = 'xaqqyqwl';
 
 export default function ContactForm() {
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        reason: ''
+    });
+    const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus('submitting');
+
+        try {
+            const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    phone: formData.phone,
+                    reason: formData.reason || 'לא צוין'
+                })
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                setFormData({ name: '', phone: '', reason: '' });
+            } else {
+                setStatus('error');
+            }
+        } catch {
+            setStatus('error');
+        }
+    };
+
     return (
         <section className="contact-form-section">
             <div className="container">
                 <h2 className="section-title">השאירו פרטים ונחזור אליכם</h2>
 
                 <div className="form-card card">
-                    <form className="contact-form">
-                        <div className="form-group">
-                            <label>שם מלא</label>
-                            <input type="text" className="form-input" placeholder="ישראל ישראלי" />
+                    {status === 'success' ? (
+                        <div className="success-message">
+                            <div className="success-icon">✓</div>
+                            <h3>הפרטים נשלחו בהצלחה!</h3>
+                            <p>נחזור אליכם בהקדם</p>
+                            <button
+                                className="btn btn-secondary submit-btn"
+                                onClick={() => setStatus('idle')}
+                            >
+                                שליחת פנייה נוספת
+                            </button>
                         </div>
-                        <div className="form-group">
-                            <label>טלפון</label>
-                            <input type="tel" className="form-input" placeholder="050-0000000" />
-                        </div>
-                        <div className="form-group">
-                            <label>סיבת הפנייה <span className="optional-label">(אופציונלי)</span></label>
-                            <select className="form-input">
-                                <option value="">בחרו נושא...</option>
-                                <option>ייעוץ כללי</option>
-                                <option>פיזיותרפיה</option>
-                                <option>אימון תנועה תפקודית</option>
-                                <option>אחר</option>
-                            </select>
-                        </div>
-                        <button type="submit" className="btn btn-secondary submit-btn">
-                            שלח/י
-                        </button>
-                    </form>
+                    ) : (
+                        <form className="contact-form" onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>שם מלא</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    className="form-input"
+                                    placeholder="ישראל ישראלי"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>טלפון</label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    className="form-input"
+                                    placeholder="050-0000000"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>סיבת הפנייה <span className="optional-label">(אופציונלי)</span></label>
+                                <select
+                                    name="reason"
+                                    className="form-input"
+                                    value={formData.reason}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">בחרו נושא...</option>
+                                    <option value="ייעוץ כללי">ייעוץ כללי</option>
+                                    <option value="פיזיותרפיה">פיזיותרפיה</option>
+                                    <option value="אימון תנועה תפקודית">אימון תנועה תפקודית</option>
+                                    <option value="אחר">אחר</option>
+                                </select>
+                            </div>
+                            {status === 'error' && (
+                                <p className="error-message">אירעה שגיאה, אנא נסו שוב</p>
+                            )}
+                            <button
+                                type="submit"
+                                className="btn btn-secondary submit-btn"
+                                disabled={status === 'submitting'}
+                            >
+                                {status === 'submitting' ? 'שולח...' : 'שלח/י'}
+                            </button>
+                        </form>
+                    )}
                 </div>
             </div>
 
@@ -94,6 +177,46 @@ export default function ContactForm() {
           font-weight: 600;
           border-radius: 0.75rem;
           margin-top: 0.5rem;
+        }
+
+        .submit-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .success-message {
+          text-align: center;
+          padding: 2rem 1rem;
+        }
+
+        .success-icon {
+          width: 60px;
+          height: 60px;
+          background: var(--color-secondary-green);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          margin: 0 auto 1rem;
+        }
+
+        .success-message h3 {
+          color: var(--color-accent);
+          margin-bottom: 0.5rem;
+          font-size: 1.3rem;
+        }
+
+        .success-message p {
+          color: var(--color-text-muted);
+          margin-bottom: 1.5rem;
+        }
+
+        .error-message {
+          color: #dc2626;
+          font-size: 0.9rem;
+          text-align: center;
         }
 
         @media (min-width: 768px) {
