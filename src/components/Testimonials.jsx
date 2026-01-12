@@ -71,13 +71,27 @@ export default function Testimonials() {
           padding: 2.5rem 0;
           background: var(--color-bg-light);
           border-radius: 1.25rem;
+          overflow: hidden;
         }
         .testimonials-grid {
           display: flex;
-          flex-direction: column;
           gap: 1rem;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0.5rem 0;
+          margin: 0 -1rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .testimonials-grid::-webkit-scrollbar {
+          display: none;
         }
         .testimonial-card {
+          flex: 0 0 85%;
+          scroll-snap-align: center;
           background: white;
           padding: 1.5rem;
           text-align: center;
@@ -86,6 +100,7 @@ export default function Testimonials() {
           align-items: center;
           gap: 1rem;
           border-radius: 1rem;
+          box-shadow: var(--shadow-card);
         }
 
         .google-badge {
@@ -126,13 +141,19 @@ export default function Testimonials() {
           .testimonials-section {
             padding: 6rem 0;
             border-radius: 1.5rem;
+            overflow: visible;
           }
           .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
+            overflow-x: visible;
+            scroll-snap-type: none;
+            margin: 0;
+            padding: 0;
           }
           .testimonial-card {
+            flex: none;
             padding: 2.5rem;
             gap: 1.5rem;
             border-radius: 1.25rem;
