@@ -31,6 +31,7 @@ export default function Footer() {
                         <li><Link to="/">דף הבית</Link></li>
                         <li><Link to="/about">אודות</Link></li>
                         <li><Link to="/services">שירותים</Link></li>
+                        <li><Link to="/blog">בלוג</Link></li>
                         <li><Link to="/contact">צור קשר</Link></li>
                     </ul>
                 </div>

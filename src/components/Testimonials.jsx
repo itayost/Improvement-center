@@ -1,5 +1,4 @@
-import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, User } from 'lucide-react';
 
 // Google icon component
 const GoogleIcon = ({ size = 20 }) => (
@@ -11,30 +10,84 @@ const GoogleIcon = ({ size = 20 }) => (
     </svg>
 );
 
+// Facebook icon component
+const FacebookIcon = ({ size = 20 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24">
+        <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+);
+
+// Avatar component with fallback (matching About page style)
+const Avatar = ({ name, image }) => {
+    if (image) {
+        return (
+            <div className="avatar">
+                <img src={image} alt={name} />
+            </div>
+        );
+    }
+
+    return (
+        <div className="avatar avatar-placeholder">
+            <User size={24} />
+        </div>
+    );
+};
+
 const testimonials = [
     {
+        name: "פרידה אסא",
+        text: "אלינה יקרה ואהובה! תודה רבה ועוד מיליון פעם תודה על הטיפול המסור באמנו. מאמנת מקצועית שאין שני לה, בשילוב של סבר פנים יפות, נימוסין והליכות, אדיבות וסבלנות אין קץ. ממפגש למפגש אמי שיתפה יותר ויותר פעולה והשתפר.",
+        stars: 5,
+        source: 'google',
+        image: '/testimonials/socials/Frida.jpeg'
+    },
+    {
+        name: "דורון כהן",
+        text: "המלצתי לאבא שלי, לאחר סדרת מפגשים היה שיפור עצום! הקשבה, מקצועיות. ממליץ בחום.",
+        stars: 5,
+        source: 'google',
+        image: '/testimonials/socials/Doron.jpeg'
+    },
+    {
+        name: "עמוס אוסטרייך",
+        text: "מאוד מקצועיים, עזרו לאבא שלי עם הביטחון בהליכה. ממליץ בחום.",
+        stars: 5,
+        source: 'facebook',
+        image: '/testimonials/socials/Amos.png'
+    },
+    {
+        name: "Daniel Yn",
+        text: "חברה מקצועית מאוד ששמה את טובת הלקוח בראש. כל הכבוד לכם.",
+        stars: 5,
+        source: 'facebook',
+        image: '/testimonials/socials/Daniel Yn.jpeg'
+    },
+    {
+        name: "Shay Azulay",
+        text: "השירות מצוין, מקצוענים ממש. ממליץ!",
+        stars: 5,
+        source: 'facebook',
+        image: '/testimonials/socials/Shay Azulay.jpeg'
+    },
+    {
         name: "טלי עקרי",
-        location: "ראשון לציון",
         text: "המרכז לשיפור התנועה הוא המקום שישפר את התנועה, האמונה והתקווה של המטופל. אבי בן ה-80 חולה פרקינסון - איתי המטפל מצליח להוציא ממנו דברים שלא הייתי מדמיינת. קימה עצמאית מכיסאו, הליכה קצרה ללא הליכון!",
-        stars: 5
+        stars: 5,
+        source: 'google',
+        image: '/testimonials/socials/Tali.jpeg'
     },
     {
         name: "ערן פניג",
-        location: "גבעתיים",
         text: "אמי מעל גיל 90 ירדה מאד ביכולת התנועה אחרי שפעת. רון עשה עבודה מקצועית מאד, מסורה ומתמידה. חל שיפור ניכר - היא מצליחה לעמוד ולהתהלך בדירה. המקצועיות והיחס האנושי ראויים לציון!",
-        stars: 5
+        stars: 5,
+        source: 'google'
     },
     {
         name: "יובל גרניט",
-        location: "תל אביב",
         text: "אבא שלי עבר תהליך מדהים – מאדם שהתקשה לקום מהכיסא, הוא הפך שוב לעצמאי ובטוח בעצמו. איתי ידע בדיוק איך לדבר אליו ולעודד אותו, עם המון רוגע, מקצועיות ולב גדול.",
-        stars: 5
-    },
-    {
-        name: "viki khana",
-        location: "קריית אתא",
-        text: "יחס אישי, סבלנות והכוונה מדויקת. בזכות הטיפולים הורגש שיפור משמעותי במצבו של אבי. ממליצה מאוד.",
-        stars: 5
+        stars: 5,
+        source: 'google'
     }
 ];
 
@@ -47,9 +100,24 @@ export default function Testimonials() {
                 <div className="testimonials-grid">
                     {testimonials.map((item, i) => (
                         <div key={i} className="testimonial-card card">
-                            <div className="google-badge">
-                                <GoogleIcon size={18} />
-                                <span>ביקורת מגוגל</span>
+                            <div className="card-header">
+                                <Avatar name={item.name} image={item.image} />
+                                <div className="author-info">
+                                    <span className="author-name">{item.name}</span>
+                                    <div className="source-badge">
+                                        {item.source === 'facebook' ? (
+                                            <>
+                                                <FacebookIcon size={16} />
+                                                <span>ממליץ בפייסבוק</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <GoogleIcon size={16} />
+                                                <span>ביקורת מגוגל</span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
                             <div className="stars">
                                 {[...Array(item.stars)].map((_, idx) => (
@@ -57,10 +125,6 @@ export default function Testimonials() {
                                 ))}
                             </div>
                             <p className="testimonial-text">"{item.text}"</p>
-                            <div className="testimonial-author">
-                                <span className="author-name">{item.name}</span>
-                                <span className="author-location">, {item.location}</span>
-                            </div>
                         </div>
                     ))}
                 </div>
@@ -94,19 +158,59 @@ export default function Testimonials() {
           scroll-snap-align: center;
           background: white;
           padding: 1.5rem;
-          text-align: center;
           display: flex;
           flex-direction: column;
-          align-items: center;
           gap: 1rem;
           border-radius: 1rem;
           box-shadow: var(--shadow-card);
         }
 
-        .google-badge {
+        .card-header {
           display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.75rem;
+        }
+
+        .avatar {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          overflow: hidden;
+          flex-shrink: 0;
+          border: 2px solid white;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .avatar img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .avatar-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+          color: #64748b;
+        }
+
+        .author-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .author-name {
+          font-weight: 700;
+          color: var(--color-accent);
+          font-size: 0.95rem;
+        }
+
+        .source-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
           font-size: 0.75rem;
           color: var(--color-text-muted);
           font-weight: 500;
@@ -123,18 +227,7 @@ export default function Testimonials() {
           color: var(--color-text-main);
           line-height: 1.7;
           min-height: auto;
-        }
-
-        .testimonial-author {
-          margin-top: auto;
-          font-weight: 700;
-          color: var(--color-accent);
-          font-size: 0.9rem;
-        }
-
-        .author-location {
-          font-weight: 300;
-          color: var(--color-text-muted);
+          text-align: right;
         }
 
         @media (min-width: 768px) {
@@ -154,17 +247,24 @@ export default function Testimonials() {
           }
           .testimonial-card {
             flex: none;
-            padding: 2.5rem;
-            gap: 1.5rem;
+            padding: 2rem;
+            gap: 1.25rem;
             border-radius: 1.25rem;
           }
-          .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            min-height: 80px;
+          .avatar {
+            width: 56px;
+            height: 56px;
           }
-          .testimonial-author {
+          .avatar-placeholder svg {
+            width: 28px;
+            height: 28px;
+          }
+          .author-name {
             font-size: 1rem;
+          }
+          .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.8;
           }
         }
       `}</style>

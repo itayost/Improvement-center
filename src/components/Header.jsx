@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Home, Info, Briefcase, MessageCircle } from 'lucide-react';
+import { Phone, Home, Info, Briefcase, MessageCircle, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
@@ -47,6 +47,7 @@ export default function Header() {
             <Link to="/" className="nav-link">דף הבית</Link>
             <Link to="/about" className="nav-link">אודות</Link>
             <Link to="/services" className="nav-link">שירותים</Link>
+            <Link to="/blog" className="nav-link">בלוג</Link>
             <Link to="/contact" className="nav-link">צור קשר</Link>
           </nav>
 
@@ -69,6 +70,10 @@ export default function Header() {
         <Link to="/services" className={`bottom-nav-item ${currentPath === '/services' ? 'active' : ''}`}>
           <Briefcase size={22} />
           <span>שירותים</span>
+        </Link>
+        <Link to="/blog" className={`bottom-nav-item ${currentPath === '/blog' || currentPath.startsWith('/blog/') ? 'active' : ''}`}>
+          <FileText size={22} />
+          <span>בלוג</span>
         </Link>
         <Link to="/about" className={`bottom-nav-item ${currentPath === '/about' ? 'active' : ''}`}>
           <Info size={22} />

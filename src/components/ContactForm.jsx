@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-const FORM_EMAIL = 'office@improve-movement.co.il';
+import { useState } from 'react';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -19,21 +17,21 @@ export default function ContactForm() {
         setStatus('submitting');
 
         try {
-            const response = await fetch(`https://formsubmit.co/ajax/${FORM_EMAIL}`, {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     name: formData.name,
                     phone: formData.phone,
-                    reason: formData.reason || 'לא צוין',
-                    _subject: 'פנייה חדשה מהאתר - המרכז לשיפור התנועה'
+                    remark: formData.reason || ''
                 })
             });
 
-            if (response.ok) {
+            const data = await response.json();
+
+            if (data.err === '0') {
                 setStatus('success');
                 setFormData({ name: '', phone: '', reason: '' });
             } else {
