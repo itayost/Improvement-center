@@ -1,4 +1,5 @@
-import { Star, User } from 'lucide-react';
+import { useRef } from 'react';
+import { Star, User, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Google icon component
 const GoogleIcon = ({ size = 20 }) => (
@@ -92,41 +93,63 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+    const scrollRef = useRef(null);
+
+    const scroll = (direction) => {
+        if (scrollRef.current) {
+            const scrollAmount = 420; // card width + gap
+            scrollRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
         <section className="testimonials-section">
             <div className="container">
                 <h2 className="section-title">מה הלקוחות מספרים</h2>
 
-                <div className="testimonials-grid">
-                    {testimonials.map((item, i) => (
-                        <div key={i} className="testimonial-card card">
-                            <div className="card-header">
-                                <Avatar name={item.name} image={item.image} />
-                                <div className="author-info">
-                                    <span className="author-name">{item.name}</span>
-                                    <div className="source-badge">
-                                        {item.source === 'facebook' ? (
-                                            <>
-                                                <FacebookIcon size={16} />
-                                                <span>ממליץ בפייסבוק</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <GoogleIcon size={16} />
-                                                <span>ביקורת מגוגל</span>
-                                            </>
-                                        )}
+                <div className="testimonials-wrapper">
+                    <button className="nav-arrow nav-arrow-right" onClick={() => scroll('right')} aria-label="הקודם">
+                        <ChevronRight size={28} />
+                    </button>
+
+                    <div className="testimonials-grid" ref={scrollRef}>
+                        {testimonials.map((item, i) => (
+                            <div key={i} className="testimonial-card card">
+                                <div className="card-header">
+                                    <Avatar name={item.name} image={item.image} />
+                                    <div className="author-info">
+                                        <span className="author-name">{item.name}</span>
+                                        <div className="source-badge">
+                                            {item.source === 'facebook' ? (
+                                                <>
+                                                    <FacebookIcon size={16} />
+                                                    <span>ממליץ בפייסבוק</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <GoogleIcon size={16} />
+                                                    <span>ביקורת מגוגל</span>
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="stars">
+                                    {[...Array(item.stars)].map((_, idx) => (
+                                        <Star key={idx} size={18} fill="#FFD700" color="#FFD700" />
+                                    ))}
+                                </div>
+                                <p className="testimonial-text">"{item.text}"</p>
                             </div>
-                            <div className="stars">
-                                {[...Array(item.stars)].map((_, idx) => (
-                                    <Star key={idx} size={18} fill="#FFD700" color="#FFD700" />
-                                ))}
-                            </div>
-                            <p className="testimonial-text">"{item.text}"</p>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    <button className="nav-arrow nav-arrow-left" onClick={() => scroll('left')} aria-label="הבא">
+                        <ChevronLeft size={28} />
+                    </button>
                 </div>
             </div>
 
@@ -136,6 +159,12 @@ export default function Testimonials() {
           background: var(--color-bg-light);
           border-radius: 1.25rem;
           overflow: hidden;
+        }
+        .testimonials-wrapper {
+          position: relative;
+        }
+        .nav-arrow {
+          display: none;
         }
         .testimonials-grid {
           display: flex;
@@ -236,17 +265,45 @@ export default function Testimonials() {
             border-radius: 1.5rem;
             overflow: visible;
           }
+          .testimonials-wrapper {
+            position: relative;
+          }
+          .nav-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            z-index: 10;
+            color: var(--color-accent);
+            transition: all 0.2s;
+          }
+          .nav-arrow:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+          }
+          .nav-arrow-right {
+            right: -24px;
+          }
+          .nav-arrow-left {
+            left: -24px;
+          }
           .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            overflow-x: visible;
-            scroll-snap-type: none;
+            gap: 1.5rem;
             margin: 0;
-            padding: 0;
+            padding: 1rem 0;
           }
           .testimonial-card {
-            flex: none;
+            flex: 0 0 400px;
             padding: 2rem;
             gap: 1.25rem;
             border-radius: 1.25rem;
