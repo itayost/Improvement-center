@@ -30,11 +30,17 @@ export default async function handler(req, res) {
             body: params.toString()
         });
 
-        const data = await response.json();
+        const text = await response.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch {
+            data = response.ok ? { err: '0', errdesc: 'Success' } : { err: '1', errdesc: 'API error' };
+        }
 
         return res.status(200).json(data);
     } catch (error) {
-        console.error('Contact API error:', error);
-        return res.status(500).json({ err: '1', errdesc: 'Server error' });
+        console.error('Contact API error:', error.message);
+        return res.status(500).json({ err: '1', errdesc: error.message || 'Server error' });
     }
 }
