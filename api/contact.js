@@ -17,9 +17,9 @@ export default async function handler(req, res) {
             'access_key': PLANDO_ACCESS_KEY,
             'no_redirect': '1',
             'name': name,
-            'contact[mobile1]': phone,
+            'phone': phone,
             'contact[customer_cat_id]': '0',
-            'contact[city]': city || ''
+            'contact[main_city]': city || ''
         });
 
         const response = await fetch(PLANDO_URL, {
