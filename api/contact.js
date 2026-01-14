@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { name, phone, remark } = req.body;
+        const { name, phone, city } = req.body;
 
         const params = new URLSearchParams({
             'access_key': PLANDO_ACCESS_KEY,
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             'name': name,
             'contact[mobile1]': phone,
             'contact[customer_cat_id]': '0',
-            'contact[remark]': remark || ''
+            'contact[city]': city || ''
         });
 
         const response = await fetch(PLANDO_URL, {

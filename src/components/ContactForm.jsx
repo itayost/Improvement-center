@@ -4,7 +4,7 @@ export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
-        reason: ''
+        city: ''
     });
     const [status, setStatus] = useState('idle'); // idle, submitting, success, error
 
@@ -25,7 +25,7 @@ export default function ContactForm() {
                 body: JSON.stringify({
                     name: formData.name,
                     phone: formData.phone,
-                    remark: formData.reason || ''
+                    city: formData.city || ''
                 })
             });
 
@@ -33,7 +33,7 @@ export default function ContactForm() {
 
             if (data.err === '0') {
                 setStatus('success');
-                setFormData({ name: '', phone: '', reason: '' });
+                setFormData({ name: '', phone: '', city: '' });
             } else {
                 setStatus('error');
             }
@@ -87,19 +87,15 @@ export default function ContactForm() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>סיבת הפנייה <span className="optional-label">(אופציונלי)</span></label>
-                                <select
-                                    name="reason"
+                                <label>עיר מגורים</label>
+                                <input
+                                    type="text"
+                                    name="city"
                                     className="form-input"
-                                    value={formData.reason}
+                                    placeholder="לדוגמה: תל אביב"
+                                    value={formData.city}
                                     onChange={handleChange}
-                                >
-                                    <option value="">בחרו נושא...</option>
-                                    <option value="ייעוץ כללי">ייעוץ כללי</option>
-                                    <option value="פיזיותרפיה">פיזיותרפיה</option>
-                                    <option value="אימון תנועה תפקודית">אימון תנועה תפקודית</option>
-                                    <option value="אחר">אחר</option>
-                                </select>
+                                />
                             </div>
                             {status === 'error' && (
                                 <p className="error-message">אירעה שגיאה, אנא נסו שוב</p>
