@@ -17,7 +17,7 @@ export default async function handler(req, res) {
             'access_key': PLANDO_ACCESS_KEY,
             'no_redirect': '1',
             'name': name,
-            'phone': phone,
+            'contact[mobile1]': phone,
             'contact[customer_cat_id]': '0',
             'contact[main_city]': city || ''
         });
