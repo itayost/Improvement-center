@@ -7,7 +7,11 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { name, phone, city } = req.body;
+        const { name, phone, city } = req.body || {};
+
+        if (!name || !phone) {
+            return res.status(400).json({ err: '1', errdesc: 'Missing required fields' });
+        }
 
         const params = new URLSearchParams({
             'access_key': PLANDO_ACCESS_KEY,
@@ -30,6 +34,7 @@ export default async function handler(req, res) {
 
         return res.status(200).json(data);
     } catch (error) {
+        console.error('Contact API error:', error);
         return res.status(500).json({ err: '1', errdesc: 'Server error' });
     }
 }
