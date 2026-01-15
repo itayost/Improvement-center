@@ -11,6 +11,7 @@ import ServicesPage from './pages/ServicesPage';
 import ContactPage from './pages/ContactPage';
 import BlogListPage from './pages/BlogListPage';
 import BlogArticlePage from './pages/BlogArticlePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogListPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           </Routes>
         </main>
         <Footer />
