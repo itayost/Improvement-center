@@ -293,7 +293,7 @@ export default function AboutPage() {
                     <p>צרו קשר עוד היום ונתאים לכם תוכנית ליווי אישית</p>
                     <div className="cta-buttons">
                         <Link to="/contact" className="btn btn-secondary cta-main-btn">
-                            צרו קשר עכשיו
+                            דברו איתנו לקביעת הערכת תפקוד
                         </Link>
                     </div>
                 </div>
