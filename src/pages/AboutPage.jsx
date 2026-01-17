@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { User } from 'lucide-react';
 
 // Staff avatar component with fallback
@@ -291,9 +292,9 @@ export default function AboutPage() {
                     <h3>רוצים להתחיל?</h3>
                     <p>צרו קשר עוד היום ונתאים לכם תוכנית ליווי אישית</p>
                     <div className="cta-buttons">
-                        <a href="tel:050-477-6665" className="btn btn-secondary cta-main-btn">
-                            דברו איתנו לקביעת הערכת תפקוד
-                        </a>
+                        <Link to="/contact" className="btn btn-secondary cta-main-btn">
+                            צרו קשר עכשיו
+                        </Link>
                     </div>
                 </div>
             </div>
