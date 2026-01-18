@@ -140,7 +140,7 @@ const staffMembers = [
         name: 'דניאל סנרמן',
         role: 'מאמן תנועה תפקודית',
         description: '',
-        img: null
+        img: '/team/דניאל סנרמן.jpeg'
     },
     {
         name: 'מזל מרזוק',
@@ -152,7 +152,7 @@ const staffMembers = [
         name: 'אחמד ביאדסה',
         role: 'פיזיותרפיסט מוסמך',
         description: 'מס\' רישיון 10-151087.',
-        img: null
+        img: '/team/אחמד בידאסה.jpeg'
     },
     {
         name: 'מוניס זחאלקה',
