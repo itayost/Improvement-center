@@ -84,6 +84,7 @@ export default function BlogArticlePage() {
                 <meta property="og:title" content={article.title} />
                 <meta property="og:description" content={article.excerpt} />
                 <meta property="og:type" content="article" />
+                {article.image && <meta property="og:image" content={`https://improve-movement.co.il${article.image}`} />}
             </Helmet>
 
             <article className="article-page">
@@ -93,6 +94,12 @@ export default function BlogArticlePage() {
                             <ArrowRight size={18} />
                             חזרה למאמרים
                         </Link>
+
+                        {article.image && (
+                            <div className="article-hero">
+                                <img src={article.image} alt={article.title} />
+                            </div>
+                        )}
 
                         <header className="article-header">
                             <h1 className="article-title">{article.title}</h1>
@@ -137,6 +144,20 @@ export default function BlogArticlePage() {
 
                 .back-link:hover {
                     opacity: 0.8;
+                }
+
+                .article-hero {
+                    margin-bottom: 1.5rem;
+                    border-radius: 1rem;
+                    overflow: hidden;
+                }
+
+                .article-hero img {
+                    width: 100%;
+                    height: auto;
+                    max-height: 300px;
+                    object-fit: cover;
+                    display: block;
                 }
 
                 .article-header {
@@ -225,6 +246,15 @@ export default function BlogArticlePage() {
                     .back-link {
                         font-size: 0.95rem;
                         margin-bottom: 2rem;
+                    }
+
+                    .article-hero {
+                        margin-bottom: 2rem;
+                        border-radius: 1.25rem;
+                    }
+
+                    .article-hero img {
+                        max-height: 400px;
                     }
 
                     .article-header {
