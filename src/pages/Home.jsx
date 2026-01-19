@@ -7,6 +7,7 @@ import Testimonials from '../components/Testimonials';
 import ContactForm from '../components/ContactForm';
 import About from '../components/About';
 import TestimonialScreenshots from '../components/TestimonialScreenshots';
+import TrustedOrganizations from '../components/TrustedOrganizations';
 
 export default function Home() {
     return (
@@ -17,6 +18,7 @@ export default function Home() {
             <Services />
             <CtaStrip />
             <About />
+            <TrustedOrganizations />
             <TestimonialScreenshots />
             <ContactForm />
         </>
