@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { User } from 'lucide-react';
+import TrustedOrganizations from '../components/TrustedOrganizations';
 
 // Staff avatar component with fallback
 const StaffAvatar = ({ src, name, className }) => {
@@ -15,16 +16,6 @@ const StaffAvatar = ({ src, name, className }) => {
         </div>
     );
 };
-
-// Trusted organizations logos
-const trustedLogos = [
-    { src: '/worked with/IMG_4123.JPG', alt: 'ארגון שותף' },
-    { src: '/worked with/IMG_4124.JPG', alt: 'ארגון שותף' },
-    { src: '/worked with/IMG_4125.JPG', alt: 'ארגון שותף' },
-    { src: '/worked with/IMG_4126.JPG', alt: 'ארגון שותף' },
-    { src: '/worked with/IMG_4127.JPG', alt: 'ארגון שותף' },
-    { src: '/worked with/ההסתדרות.PNG', alt: 'ההסתדרות' }
-];
 
 const staffMembers = [
     {
@@ -275,18 +266,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Trusted Organizations Section */}
-                <div className="trusted-section">
-                    <h2 className="sub-title">נותנים בנו אמון</h2>
-                    <div className="trusted-scroll">
-                        <div className="trusted-track">
-                            {[...trustedLogos, ...trustedLogos].map((logo, idx) => (
-                                <div key={idx} className="logo-item">
-                                    <img src={logo.src} alt={logo.alt} />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                <TrustedOrganizations />
 
                 <div className="cta-section">
                     <h3>רוצים להתחיל?</h3>
@@ -465,50 +445,6 @@ export default function AboutPage() {
           line-height: 1.4;
         }
 
-        .trusted-section {
-          margin-bottom: 2rem;
-        }
-
-        .trusted-scroll {
-          overflow: hidden;
-          padding: 1rem 0;
-        }
-
-        .trusted-track {
-          display: flex;
-          gap: 1.5rem;
-          width: max-content;
-          animation: scrollLogos 25s linear infinite;
-        }
-
-        @keyframes scrollLogos {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(50%);
-          }
-        }
-
-        .logo-item {
-          flex-shrink: 0;
-          background: white;
-          padding: 1rem;
-          border-radius: 1rem;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .logo-item img {
-          height: 70px;
-          width: auto;
-          max-width: 140px;
-          object-fit: contain;
-          filter: grayscale(30%);
-        }
-
         .cta-section {
           text-align: center;
           padding: 1.5rem;
@@ -656,20 +592,6 @@ export default function AboutPage() {
           .staff-card p {
             font-size: 0.9rem;
             line-height: 1.5;
-          }
-          .trusted-section {
-            margin-bottom: 4rem;
-          }
-          .trusted-track {
-            gap: 2rem;
-          }
-          .logo-item {
-            padding: 1rem 1.5rem;
-            border-radius: 1.25rem;
-          }
-          .logo-item img {
-            height: 90px;
-            max-width: 180px;
           }
           .cta-section {
             padding: 3rem;
