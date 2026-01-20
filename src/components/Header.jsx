@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Home, Info, Briefcase, MessageCircle, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { trackPhoneClick } from '../utils/analytics';
 
 export default function Header() {
   const location = useLocation();
@@ -53,7 +54,7 @@ export default function Header() {
 
           {/* CTA / Phone */}
           <div className="header-actions">
-            <a href="tel:073-729-66-99" className="phone-btn">
+            <a href="tel:073-729-66-99" className="phone-btn" onClick={() => trackPhoneClick('header')}>
               <Phone size={20} />
               <span>073-729-66-99</span>
             </a>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react';
 import logo from '../assets/logo.png';
+import { trackPhoneClick, trackWhatsAppClick } from '../utils/analytics';
 
 const WhatsAppIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -41,11 +42,11 @@ export default function Footer() {
                     <ul className="contact-list">
                         <li>
                             <Phone size={18} />
-                            <a href="tel:073-729-66-99" style={{color: '#e2e8f0'}}>073-729-66-99</a>
+                            <a href="tel:073-729-66-99" style={{color: '#e2e8f0'}} onClick={() => trackPhoneClick('footer')}>073-729-66-99</a>
                         </li>
                         <li>
                             <WhatsAppIcon size={18} />
-                            <a href="https://wa.me/972504776665" style={{color: '#e2e8f0'}}>050-477-6665 (WhatsApp)</a>
+                            <a href="https://wa.me/972504776665" style={{color: '#e2e8f0'}} onClick={() => trackWhatsAppClick('footer')}>050-477-6665 (WhatsApp)</a>
                         </li>
                         <li>
                             <Mail size={18} />

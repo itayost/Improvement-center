@@ -1,4 +1,5 @@
 import { CheckCircle, Users, Activity, Heart, Brain, Home, Phone } from 'lucide-react';
+import { trackPhoneClick } from '../utils/analytics';
 
 const mainServices = [
     {
@@ -139,7 +140,7 @@ export default function ServicesPage() {
                     <h3>רוצים להתחיל?</h3>
                     <p>המפגש הראשון כולל מבדק הערכה מקיף</p>
                     <div className="cta-buttons">
-                        <a href="tel:050-477-6665" className="btn btn-secondary cta-call-btn">
+                        <a href="tel:050-477-6665" className="btn btn-secondary cta-call-btn" onClick={() => trackPhoneClick('services_page')}>
                             <Phone size={20} />
                             חייגו עכשיו
                         </a>

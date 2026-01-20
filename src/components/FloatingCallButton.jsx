@@ -1,10 +1,11 @@
 import React from 'react';
 import { Phone } from 'lucide-react';
+import { trackPhoneClick } from '../utils/analytics';
 
 export default function FloatingCallButton() {
   return (
     <>
-      <a href="tel:050-477-6665" className="floating-call-btn" aria-label="התקשרו אלינו">
+      <a href="tel:050-477-6665" className="floating-call-btn" aria-label="התקשרו אלינו" onClick={() => trackPhoneClick('floating_button')}>
         <Phone size={28} />
       </a>
       <style>{`

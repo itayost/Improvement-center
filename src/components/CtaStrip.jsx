@@ -1,4 +1,5 @@
 import React from 'react';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 const WhatsAppIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -15,7 +16,7 @@ export default function CtaStrip() {
                     <p>התאמת תוכנית לשיפור התנועה התפקודית בהתאמה אישית</p>
                 </div>
                 <div className="cta-buttons">
-                    <a href="https://wa.me/972504776665?text=היי%2C%20הגעתי%20מהאתר%20ואני%20מעוניין%20לדעת%20עוד%20על%20הערכת%20תפקוד" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                    <a href="https://wa.me/972504776665?text=היי%2C%20הגעתי%20מהאתר%20ואני%20מעוניין%20לדעת%20עוד%20על%20הערכת%20תפקוד" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" onClick={() => trackWhatsAppClick('cta_strip')}>
                         <WhatsAppIcon size={20} />
                         לקביעת הערכת תפקוד
                     </a>

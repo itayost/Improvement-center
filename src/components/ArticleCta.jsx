@@ -1,5 +1,6 @@
 import WhatsAppIcon from './icons/WhatsAppIcon';
 import { getWhatsAppLink } from '../constants/contact';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 export default function ArticleCta() {
     return (
@@ -11,6 +12,7 @@ export default function ArticleCta() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="article-cta-btn"
+                onClick={() => trackWhatsAppClick('article_cta')}
             >
                 <WhatsAppIcon size={20} />
                 לתיאום מפגש הערכה

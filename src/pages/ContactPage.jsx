@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import Faq from '../components/Faq';
 import ContactForm from '../components/ContactForm';
 import TrustedOrganizations from '../components/TrustedOrganizations';
+import { trackPhoneClick, trackWhatsAppClick } from '../utils/analytics';
 
 const WhatsAppIcon = ({ size = 24, color = "#25D366" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
@@ -29,14 +30,14 @@ export default function ContactPage() {
                             <Phone size={24} color="var(--color-primary-blue)" />
                             <div>
                                 
-                                <a href="tel:073-729-66-99">073-729-66-99</a>
+                                <a href="tel:073-729-66-99" onClick={() => trackPhoneClick('contact_page')}>073-729-66-99</a>
                             </div>
                         </div>
                         <div className="method">
                             <WhatsAppIcon size={24} />
                             <div>
                                 
-                                <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer">050-477-6665</a>
+                                <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsAppClick('contact_page')}>050-477-6665</a>
                             </div>
                         </div>
                         <div className="method">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 const WhatsAppIcon = ({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{display: 'inline', verticalAlign: 'middle', marginLeft: '0.25rem'}}>
@@ -75,7 +76,7 @@ export default function Services() {
               המערכת פשוטה, נגישה, מותאמת במיוחד לגיל השלישי,
               ומשלימה את העבודה בבית כחלק מתהליך ליווי רציף.
             </p>
-            <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" className="text-link"><WhatsAppIcon size={16} /> התחילו עכשיו</a>
+            <a href="https://wa.me/972504776665" target="_blank" rel="noopener noreferrer" className="text-link" onClick={() => trackWhatsAppClick('services')}><WhatsAppIcon size={16} /> התחילו עכשיו</a>
           </div>
 
           {/* Image Card */}
