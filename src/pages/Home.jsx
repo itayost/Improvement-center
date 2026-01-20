@@ -18,9 +18,9 @@ export default function Home() {
             <Services />
             <CtaStrip />
             <About />
-            <TrustedOrganizations />
             <TestimonialScreenshots />
             <ContactForm />
+            <TrustedOrganizations />
         </>
     );
 }
