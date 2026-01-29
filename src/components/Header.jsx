@@ -1,39 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Home, Info, Briefcase, MessageCircle, FileText } from 'lucide-react';
+import { Phone, Home, Info, Briefcase, MessageCircle, FileText, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { trackPhoneClick } from '../utils/analytics';
 
+// Navigation items for both desktop and mobile
+const NAV_ITEMS = [
+  { path: '/', label: 'דף הבית', mobileLabel: 'בית', Icon: Home },
+  { path: '/services', label: 'שירותים', mobileLabel: 'שירותים', Icon: Briefcase },
+  { path: '/blog', label: 'בלוג', mobileLabel: 'בלוג', Icon: FileText, matchPrefix: true },
+  { path: '/about', label: 'אודות', mobileLabel: 'אודות', Icon: Info },
+  { path: '/contact', label: 'צור קשר', mobileLabel: 'צור קשר', Icon: MessageCircle }
+];
+
 export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
-  const [headerHidden, setHeaderHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  const toggleMenu = () => setMenuOpen(prev => !prev);
+
+  // Close menu on route change
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+    setMenuOpen(false);
+  }, [location.pathname]);
 
-      // Only hide/show on mobile (under 768px)
-      if (window.innerWidth < 768) {
-        if (currentScrollY > lastScrollY && currentScrollY > 60) {
-          setHeaderHidden(true);
-        } else {
-          setHeaderHidden(false);
-        }
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && menuOpen) {
+        setMenuOpen(false);
       }
-
-      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [menuOpen]);
+
+  // Helper to check if nav item is active
+  const isActive = (item) => {
+    if (item.matchPrefix) {
+      return currentPath === item.path || currentPath.startsWith(item.path + '/');
+    }
+    return currentPath === item.path;
+  };
 
   return (
     <>
-      <header className={`header ${headerHidden ? 'header-hidden' : ''}`}>
+      <header className="header">
         <div className="container header-container">
+          {/* Mobile Hamburger Button */}
+          <button
+            className="hamburger-btn"
+            onClick={toggleMenu}
+            aria-label="תפריט ניווט"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
           {/* Logo */}
           <Link to="/" className="logo-container">
             <img src={logo} alt="המרכז לשיפור התנועה" className="logo-img" />
@@ -45,11 +71,11 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="desktop-nav">
-            <Link to="/" className="nav-link">דף הבית</Link>
-            <Link to="/about" className="nav-link">אודות</Link>
-            <Link to="/services" className="nav-link">שירותים</Link>
-            <Link to="/blog" className="nav-link">בלוג</Link>
-            <Link to="/contact" className="nav-link">צור קשר</Link>
+            {NAV_ITEMS.map(item => (
+              <Link key={item.path} to={item.path} className="nav-link">
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           {/* CTA / Phone */}
@@ -60,31 +86,25 @@ export default function Header() {
             </a>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="mobile-bottom-nav">
-        <Link to="/" className={`bottom-nav-item ${currentPath === '/' ? 'active' : ''}`}>
-          <Home size={22} />
-          <span>בית</span>
-        </Link>
-        <Link to="/services" className={`bottom-nav-item ${currentPath === '/services' ? 'active' : ''}`}>
-          <Briefcase size={22} />
-          <span>שירותים</span>
-        </Link>
-        <Link to="/blog" className={`bottom-nav-item ${currentPath === '/blog' || currentPath.startsWith('/blog/') ? 'active' : ''}`}>
-          <FileText size={22} />
-          <span>בלוג</span>
-        </Link>
-        <Link to="/about" className={`bottom-nav-item ${currentPath === '/about' ? 'active' : ''}`}>
-          <Info size={22} />
-          <span>אודות</span>
-        </Link>
-        <Link to="/contact" className={`bottom-nav-item ${currentPath === '/contact' ? 'active' : ''}`}>
-          <MessageCircle size={22} />
-          <span>צור קשר</span>
-        </Link>
-      </nav>
+        {/* Mobile Slide-Down Menu - inside header so they stick together */}
+        <nav
+          id="mobile-menu"
+          className={`mobile-menu ${menuOpen ? 'open' : ''}`}
+          aria-label="ניווט ראשי"
+        >
+          {NAV_ITEMS.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`mobile-menu-item ${isActive(item) ? 'active' : ''}`}
+            >
+              <item.Icon size={22} />
+              <span>{item.mobileLabel}</span>
+            </Link>
+          ))}
+        </nav>
+      </header>
 
       <style>{`
         .header {
@@ -94,10 +114,6 @@ export default function Header() {
           top: 0;
           z-index: 1000;
           padding: 1rem 0;
-          transition: transform 0.3s ease;
-        }
-        .header-hidden {
-          transform: translateY(-100%);
         }
         .header-container {
           display: flex;
@@ -158,47 +174,70 @@ export default function Header() {
           display: none;
         }
 
-        /* Mobile Bottom Navigation */
-        .mobile-bottom-nav {
+        /* Mobile Hamburger Button */
+        .hamburger-btn {
           display: flex;
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: white;
-          box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-          z-index: 1000;
-          padding: 0.75rem 0;
-          padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
-          border-radius: 1.5rem 1.5rem 0 0;
-        }
-        .bottom-nav-item {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
           align-items: center;
-          gap: 0.25rem;
+          justify-content: center;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: var(--color-text-main);
           padding: 0.5rem;
-          color: var(--color-text-muted);
-          font-size: 0.7rem;
-          font-weight: 500;
-          transition: color 0.2s;
+          border-radius: 8px;
+          transition: all 0.2s;
         }
-        .bottom-nav-item.active {
-          color: var(--color-primary);
-        }
-        .bottom-nav-item:hover {
+        .hamburger-btn:hover {
+          background: var(--color-bg-body);
           color: var(--color-primary);
         }
 
-        /* Add padding to body for bottom nav */
-        @media (max-width: 767px) {
-          body {
-            padding-bottom: 70px;
+        /* Mobile Slide-Down Menu */
+        .mobile-menu {
+          display: flex;
+          flex-direction: column;
+          background: white;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+        .mobile-menu.open {
+          max-height: 350px;
+        }
+        .mobile-menu-item {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1rem 1.5rem;
+          color: var(--color-text-main);
+          font-size: 1rem;
+          font-weight: 500;
+          transition: all 0.2s;
+          border-bottom: 1px solid var(--color-border);
+        }
+        .mobile-menu-item:last-child {
+          border-bottom: none;
+        }
+        .mobile-menu-item.active {
+          background: var(--color-bg-body);
+          color: var(--color-primary);
+        }
+
+        /* Only apply hover on devices that support it (not touch) */
+        @media (hover: hover) {
+          .mobile-menu-item:hover {
+            background: var(--color-bg-body);
+            color: var(--color-primary);
           }
         }
 
         @media (min-width: 768px) {
+          .hamburger-btn {
+            display: none;
+          }
+          .mobile-menu {
+            display: none;
+          }
           .logo-img {
             height: 50px;
           }
@@ -213,9 +252,6 @@ export default function Header() {
           }
           .phone-btn span {
             display: inline;
-          }
-          .mobile-bottom-nav {
-            display: none;
           }
         }
       `}</style>

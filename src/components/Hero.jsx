@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+// Static hero image
+const HERO_IMAGE = "/hero/תמונה 1.jpeg";
 
 // Google icon component
 const GoogleIcon = ({ size = 20 }) => (
@@ -18,12 +21,6 @@ const FacebookIcon = ({ size = 20 }) => (
   </svg>
 );
 
-// Carousel slides configuration (images only)
-const heroSlides = [
-  { image: "/hero/תמונה 1.jpeg", desktopPosition: "center 15%" },
-  { image: "/hero/תמונה 2.png", desktopPosition: "center 10%" },
-  { image: "/hero/תמונה 4.png", desktopPosition: "center 25%" }
-];
 
 // Trust badges that rotate independently
 const trustBadges = [
@@ -38,16 +35,7 @@ const trustBadges = [
 ];
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [currentBadge, setCurrentBadge] = useState(0);
-
-  // Auto-rotate slides every 6 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
 
   // Auto-rotate badges every 6 seconds
   useEffect(() => {
@@ -57,24 +45,14 @@ export default function Hero() {
     return () => clearInterval(badgeTimer);
   }, []);
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
   return (
     <section className="hero">
-      {/* Full-screen image carousel */}
-      <div className="hero-carousel">
-        {heroSlides.map((slide, index) => (
-          <div
-            key={index}
-            className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-            style={{
-              backgroundImage: `url('${slide.image}')`,
-              '--desktop-position': slide.desktopPosition
-            }}
-          />
-        ))}
+      {/* Static hero background */}
+      <div className="hero-background">
+        <div
+          className="hero-image"
+          style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
+        />
         <div className="hero-overlay"></div>
       </div>
 
@@ -99,32 +77,20 @@ export default function Hero() {
       <div className="container hero-container">
         <div className="hero-card">
           <h1 className="hero-main-title">
-            <span className="title-line">מרגישים ירידה בתפקוד היום יומי?</span>
-            <span className="title-line">חווים חוסר שיווי משקל או נפילות?</span>
+            <span className="title-line">חווים ירידה בתפקוד היום יומי?</span>
+            <span className="title-line">חוסר שיווי משקל או נפילות?</span>
           </h1>
           <p className="hero-subtitle">
-            <span className="subtitle-line">לחזור לחיים עצמאיים!</span>
-            <span className="subtitle-line">תהליך שיקומי־תנועתי עד הבית!</span>
+            אימוניים שיקומיים בהתאמה אישית עד הבית!
           </p>
           <div className="hero-actions">
             <Link to="/contact" className="btn btn-secondary hero-cta">
-              לקביעת הערכת תפקוד
+              לקביעת הערכת ראשונית
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Dot indicators */}
-      <div className="hero-dots">
-        {heroSlides.map((_, index) => (
-          <button
-            key={index}
-            className={`hero-dot ${index === currentSlide ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
 
       <style>{`
         .hero {
@@ -135,24 +101,18 @@ export default function Hero() {
           justify-content: flex-end;
         }
 
-        /* Full-screen carousel */
-        .hero-carousel {
+        /* Static hero background */
+        .hero-background {
           position: absolute;
           inset: 0;
           z-index: 0;
         }
 
-        .hero-slide {
+        .hero-image {
           position: absolute;
           inset: 0;
           background-size: cover;
-          background-position: center;
-          opacity: 0;
-          transition: opacity 1s ease-in-out;
-        }
-
-        .hero-slide.active {
-          opacity: 1;
+          background-position: center 15%;
         }
 
         .hero-overlay {
@@ -161,8 +121,8 @@ export default function Hero() {
           background: linear-gradient(
             to bottom,
             rgba(0,0,0,0.1) 0%,
-            rgba(0,0,0,0.3) 50%,
-            rgba(0,0,0,0.6) 100%
+            rgba(0,0,0,0.25) 50%,
+            rgba(0,0,0,0.5) 100%
           );
           z-index: 1;
         }
@@ -237,17 +197,16 @@ export default function Hero() {
         }
 
         .hero-card {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          padding: 1.25rem;
-          border-radius: 1.25rem;
-          box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
+          padding: 1.5rem;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(4px);
+          border-radius: 1rem;
         }
 
         .hero-main-title {
           font-size: 1.3rem;
           font-weight: 700;
-          color: var(--color-accent);
+          color: var(--color-primary-blue);
           margin-bottom: 0.75rem;
           line-height: 1.4;
           text-align: center;
@@ -285,33 +244,6 @@ export default function Hero() {
           font-weight: 600;
         }
 
-        /* Dot indicators */
-        .hero-dots {
-          position: absolute;
-          bottom: 1.25rem;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 0.5rem;
-          z-index: 10;
-        }
-
-        .hero-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.5);
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          padding: 0;
-        }
-
-        .hero-dot.active {
-          background: white;
-          transform: scale(1.3);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
 
         /* Desktop */
         @media (min-width: 768px) {
@@ -320,8 +252,8 @@ export default function Hero() {
             justify-content: center;
             padding: 3rem 0;
           }
-          .hero-slide {
-            background-position: var(--desktop-position, center 20%);
+          .hero-image {
+            background-position: center 15%;
           }
           .hero-overlay {
             background: rgba(0,0,0,0.35);
@@ -357,9 +289,8 @@ export default function Hero() {
           }
           .hero-card {
             padding: 2.5rem 3rem;
-            border-radius: 1.5rem;
             max-width: 600px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 1.25rem;
           }
           .hero-main-title {
             font-size: 1.8rem;
@@ -376,14 +307,6 @@ export default function Hero() {
             width: auto;
             padding: 1.25rem 3rem;
             font-size: 1.3rem;
-          }
-          .hero-dots {
-            bottom: 2rem;
-            gap: 0.75rem;
-          }
-          .hero-dot {
-            width: 12px;
-            height: 12px;
           }
         }
       `}</style>

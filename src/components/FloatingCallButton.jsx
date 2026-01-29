@@ -11,8 +11,8 @@ export default function FloatingCallButton() {
       <style>{`
         .floating-call-btn {
           position: fixed;
-          bottom: 5.5rem;
-          left: 0.5rem;
+          bottom: 1.5rem;
+          left: 1rem;
           width: 60px;
           height: 60px;
           background: linear-gradient(135deg, #88C23D, #6BA82E);

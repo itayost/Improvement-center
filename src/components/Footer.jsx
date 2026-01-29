@@ -79,7 +79,6 @@ export default function Footer() {
           color: white;
           padding-top: 2rem;
           border-radius: 1.5rem 1.5rem 0 0;
-          margin-bottom: 70px;
         }
         .footer-container {
           display: flex;
