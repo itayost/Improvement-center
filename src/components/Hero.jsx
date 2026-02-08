@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Static hero image
-const HERO_IMAGE = "/hero/תמונה 1.jpeg";
+// Hero slides configuration
+const HERO_SLIDES = [
+  { type: 'single', image: '/hero/תמונה 1.jpeg' },
+  { type: 'dual', right: '/hero/תמונה 2 ימין.jpeg', left: '/hero/תמונה 2 שמאל.jpeg' },
+  { type: 'dual', right: '/hero/תמונה 3 ימין.jpeg', left: '/hero/תמונה 3 שמאל.jpeg' },
+];
 
 // Google icon component
 const GoogleIcon = ({ size = 20 }) => (
@@ -36,6 +40,7 @@ const trustBadges = [
 
 export default function Hero() {
   const [currentBadge, setCurrentBadge] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Auto-rotate badges every 6 seconds
   useEffect(() => {
@@ -45,14 +50,42 @@ export default function Hero() {
     return () => clearInterval(badgeTimer);
   }, []);
 
+  // Auto-rotate slides every 5 seconds
+  useEffect(() => {
+    const slideTimer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 5000);
+    return () => clearInterval(slideTimer);
+  }, []);
+
   return (
     <section className="hero">
-      {/* Static hero background */}
+      {/* Carousel hero background */}
       <div className="hero-background">
-        <div
-          className="hero-image"
-          style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
-        />
+        {HERO_SLIDES.map((slide, index) => (
+          <div
+            key={index}
+            className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+          >
+            {slide.type === 'single' ? (
+              <div
+                className="hero-image"
+                style={{ backgroundImage: `url('${slide.image}')` }}
+              />
+            ) : (
+              <div className="hero-dual">
+                <div
+                  className="hero-dual-image"
+                  style={{ backgroundImage: `url('${slide.right}')` }}
+                />
+                <div
+                  className="hero-dual-image"
+                  style={{ backgroundImage: `url('${slide.left}')` }}
+                />
+              </div>
+            )}
+          </div>
+        ))}
         <div className="hero-overlay"></div>
       </div>
 
@@ -101,11 +134,22 @@ export default function Hero() {
           justify-content: flex-end;
         }
 
-        /* Static hero background */
+        /* Hero background carousel */
         .hero-background {
           position: absolute;
           inset: 0;
           z-index: 0;
+        }
+
+        .hero-slide {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+          opacity: 1;
         }
 
         .hero-image {
@@ -113,6 +157,18 @@ export default function Hero() {
           inset: 0;
           background-size: cover;
           background-position: center 15%;
+        }
+
+        .hero-dual {
+          display: flex;
+          position: absolute;
+          inset: 0;
+        }
+
+        .hero-dual-image {
+          flex: 1;
+          background-size: cover;
+          background-position: center;
         }
 
         .hero-overlay {
