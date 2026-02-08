@@ -168,7 +168,7 @@ export default function Hero() {
         .hero-dual-image {
           flex: 1;
           background-size: cover;
-          background-position: center;
+          background-position: center 20%;
         }
 
         .hero-overlay {
