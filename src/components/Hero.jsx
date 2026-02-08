@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 // Hero slides configuration
 const HERO_SLIDES = [
   { type: 'single', image: '/hero/תמונה 1.jpeg' },
-  { type: 'dual', right: '/hero/תמונה 2 ימין.jpeg', left: '/hero/תמונה 2 שמאל.jpeg' },
-  { type: 'dual', right: '/hero/תמונה 3 ימין.jpeg', left: '/hero/תמונה 3 שמאל.jpeg' },
+  { type: 'dual', right: '/hero/תמונה 2 ימין.jpeg', left: '/hero/תמונה 2 שמאל.jpeg', position: '30%' },
+  { type: 'dual', right: '/hero/תמונה 3 ימין.jpeg', left: '/hero/תמונה 3 שמאל.jpeg', position: '25%' },
 ];
 
 // Google icon component
@@ -76,11 +76,11 @@ export default function Hero() {
               <div className="hero-dual">
                 <div
                   className="hero-dual-image"
-                  style={{ backgroundImage: `url('${slide.right}')` }}
+                  style={{ backgroundImage: `url('${slide.right}')`, backgroundPosition: `center ${slide.position}` }}
                 />
                 <div
                   className="hero-dual-image"
-                  style={{ backgroundImage: `url('${slide.left}')` }}
+                  style={{ backgroundImage: `url('${slide.left}')`, backgroundPosition: `center ${slide.position}` }}
                 />
               </div>
             )}
@@ -168,7 +168,7 @@ export default function Hero() {
         .hero-dual-image {
           flex: 1;
           background-size: cover;
-          background-position: center 20%;
+          background-position: center 30%;
         }
 
         .hero-overlay {
