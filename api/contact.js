@@ -44,7 +44,7 @@ export default async function handler(req, res) {
                     name,
                     phone,
                     city: city || undefined,
-                    source: 'other',
+                    source: 'website',
                 }),
             }).catch((err) => {
                 console.error('ingestLead error:', err.message);
