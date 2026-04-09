@@ -140,12 +140,6 @@ const staffMembers = [
         img: null
     },
     {
-        name: 'אחמד ביאדסה',
-        role: 'פיזיותרפיסט מוסמך',
-        description: 'מס\' רישיון 10-151087.',
-        img: '/team/אחמד בידאסה.jpeg'
-    },
-    {
         name: 'מוניס זחאלקה',
         role: 'פיזיותרפיסט מוסמך',
         description: '',
