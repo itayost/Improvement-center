@@ -81,7 +81,7 @@ export default function Services() {
 
           {/* Image Card */}
           <div className="assuta-card-image">
-            <img src="/פעילים פלוס.png" alt="פעילים פלוס" />
+            <img src="/פעילים פלוס חדש.png" alt="פעילים פלוס" />
           </div>
         </div>
       </div>

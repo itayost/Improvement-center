@@ -4,7 +4,9 @@ const trustedLogos = [
     { src: '/worked with/IMG_4125.JPG', alt: 'ארגון שותף' },
     { src: '/worked with/IMG_4126.JPG', alt: 'ארגון שותף' },
     { src: '/worked with/IMG_4127.JPG', alt: 'ארגון שותף' },
-    { src: '/worked with/ההסתדרות.PNG', alt: 'ההסתדרות' }
+    { src: '/worked with/ההסתדרות.PNG', alt: 'ההסתדרות' },
+    { src: '/worked with/24934809_1742909170874_0.jpg', alt: 'מאוחדת' },
+    { src: '/worked with/images.png', alt: 'לב רחובות' }
 ];
 
 export default function TrustedOrganizations() {
