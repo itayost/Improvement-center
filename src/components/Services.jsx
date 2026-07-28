@@ -136,7 +136,7 @@ export default function Services() {
           border-radius: 1.25rem;
           overflow: hidden;
           box-shadow: var(--shadow-card);
-          height: 200px;
+          aspect-ratio: 4 / 5;
           order: -1;
         }
         .assuta-card-image img {
@@ -281,6 +281,7 @@ export default function Services() {
           }
           .assuta-card-image {
             border-radius: 1.5rem;
+            aspect-ratio: auto;
             min-height: 350px;
             height: 100%;
             order: 0;
