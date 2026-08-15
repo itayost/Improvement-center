@@ -17,13 +17,16 @@ export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
   const [menuOpen, setMenuOpen] = useState(false);
+  const [renderedPath, setRenderedPath] = useState(currentPath);
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
 
-  // Close menu on route change
-  useEffect(() => {
+  // Close menu on route change. Adjusted during render rather than in an
+  // effect, which would trigger a cascading re-render.
+  if (renderedPath !== currentPath) {
+    setRenderedPath(currentPath);
     setMenuOpen(false);
-  }, [location.pathname]);
+  }
 
   // Close menu on Escape key
   useEffect(() => {
