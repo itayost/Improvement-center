@@ -80,7 +80,7 @@ export default function Hero() {
             <span className="title-line">חוסר שיווי משקל או נפילות?</span>
           </h1>
           <p className="hero-subtitle">
-            אימוניים שיקומיים בהתאמה אישית עד הבית!
+            פיזיותרפיה ואימון בהתאמה אישית עד הבית!
           </p>
           <div className="hero-actions">
             <Link to="/contact" className="btn btn-secondary hero-cta">
