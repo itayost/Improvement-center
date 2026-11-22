@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { trackFormSubmit } from '../utils/analytics';
+import { INVALID_PHONE_MESSAGE, normalizeIsraeliPhone } from '../utils/phone';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -8,13 +9,29 @@ export default function ContactForm() {
         city: ''
     });
     const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+    const [phoneError, setPhoneError] = useState('');
+    const phoneInputRef = useRef(null);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (e.target.name === 'phone') setPhoneError('');
+    };
+
+    const showPhoneError = () => {
+        setPhoneError(INVALID_PHONE_MESSAGE);
+        setStatus('idle');
+        phoneInputRef.current?.focus();
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const phone = normalizeIsraeliPhone(formData.phone);
+        if (!phone) {
+            showPhoneError();
+            return;
+        }
+
         setStatus('submitting');
 
         try {
@@ -25,7 +42,7 @@ export default function ContactForm() {
                 },
                 body: JSON.stringify({
                     name: formData.name,
-                    phone: formData.phone,
+                    phone,
                     city: formData.city || ''
                 })
             });
@@ -36,6 +53,8 @@ export default function ContactForm() {
                 setStatus('success');
                 setFormData({ name: '', phone: '', city: '' });
                 trackFormSubmit();
+            } else if (data.errdesc === 'invalid_phone') {
+                showPhoneError();
             } else {
                 setStatus('error');
             }
@@ -77,16 +96,27 @@ export default function ContactForm() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>טלפון</label>
+                                <label htmlFor="contact-phone">טלפון</label>
                                 <input
+                                    ref={phoneInputRef}
+                                    id="contact-phone"
                                     type="tel"
                                     name="phone"
+                                    inputMode="tel"
+                                    autoComplete="tel"
                                     className="form-input"
                                     placeholder="050-0000000"
                                     value={formData.phone}
                                     onChange={handleChange}
+                                    aria-invalid={phoneError ? 'true' : undefined}
+                                    aria-describedby={phoneError ? 'contact-phone-error' : undefined}
                                     required
                                 />
+                                {phoneError && (
+                                    <p id="contact-phone-error" className="field-error" role="alert">
+                                        {phoneError}
+                                    </p>
+                                )}
                             </div>
                             <div className="form-group">
                                 <label>עיר מגורים</label>
@@ -209,6 +239,16 @@ export default function ContactForm() {
         .success-message p {
           color: var(--color-text-muted);
           margin-bottom: 1.5rem;
+        }
+
+        .form-input[aria-invalid="true"] {
+          border-color: #dc2626;
+        }
+
+        .field-error {
+          color: #dc2626;
+          font-size: 0.9rem;
+          margin-top: 0.4rem;
         }
 
         .error-message {

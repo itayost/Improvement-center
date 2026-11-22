@@ -1,3 +1,5 @@
+import { normalizeIsraeliPhone } from '../src/utils/phone.js';
+
 const INGEST_LEAD_URL = 'https://fyktrpgufhibhstsnxwo.supabase.co/functions/v1/ingestLead';
 
 export default async function handler(req, res) {
@@ -18,6 +20,12 @@ export default async function handler(req, res) {
             return res.status(400).json({ err: '1', errdesc: 'Missing required fields' });
         }
 
+        // The form checks too, but a request can skip the browser.
+        const normalizedPhone = normalizeIsraeliPhone(phone);
+        if (!normalizedPhone) {
+            return res.status(400).json({ err: '1', errdesc: 'invalid_phone' });
+        }
+
         const response = await fetch(INGEST_LEAD_URL, {
             method: 'POST',
             headers: {
@@ -26,7 +34,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 name,
-                phone,
+                phone: normalizedPhone,
                 city: city || undefined,
                 source: 'website',
             }),
