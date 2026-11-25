@@ -69,7 +69,7 @@ export default function Footer() {
                 <div className="container">
                     <p>© 2026 כל הזכויות שמורות למרכז לשיפור התנועה</p>
                     <p className="privacy-link"><Link to="/privacy-policy">מדיניות פרטיות</Link></p>
-                    <p className="credit">בנייה ועיצוב: <a href="https://www.itayost.com/" target="_blank" rel="noopener noreferrer">ItayOst</a></p>
+                    <p className="credit">עוצב ופותח על ידי <a href="https://www.itayost.com" target="_blank" rel="noopener">ITAYOST</a></p>
                 </div>
             </div>
 
